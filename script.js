@@ -1,9 +1,18 @@
 // Elementos HTML
+let colorBalls;
 let balls;
+let rgbColor;
+let answer;
+
+// Circulo sorteado
+let chosenBall;
 
 // Obtem os elementos da página
 function obterElementos() {
+  colorBalls = document.getElementById('color-balls');
   balls = document.getElementsByClassName('ball');
+  rgbColor = document.getElementById('rgb-color');
+  answer = document.getElementById('answer');
 }
 
 // Gerar cor aleatória
@@ -35,6 +44,41 @@ function definirCor() {
   }
 }
 
+// Sorteia um circulo
+function sortearCirculo() {
+  chosenBall = balls[Math.floor(Math.random() * balls.length)];
+}
+
+// Define novas cores e escolhe uma que devera ser adivinhada
+function resetar() {
+  definirCor();
+  sortearCirculo();
+  // Pega a cor do circulo e coloca na tela o valor rgb dela para ser adivinhada
+  let corRGB = chosenBall.style.backgroundColor;
+  corRGB = corRGB.slice(3, corRGB.length);
+  rgbColor.textContent = corRGB;
+  // Reseta o texto de resposta
+  answer.textContent = 'Escolha uma cor';
+}
+
+// Verifica se a cor escolhida é a correta
+function verificarCor(event) {
+  const element = event.target;
+  if (element.classList.contains('ball')) {
+    if (element === chosenBall) {
+      answer.textContent = 'Acertou!';
+    } else {
+      answer.textContent = 'Errou! Tente novamente!';
+    }
+  }
+}
+
+// Adiciona ouvintes aos elementos
+function adicionarOuvinte() {
+  colorBalls.addEventListener('click', verificarCor);
+}
+
 // Iniciando a aplicação chamando as funções necessárias
 obterElementos();
-definirCor();
+adicionarOuvinte();
+resetar();
