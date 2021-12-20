@@ -3,16 +3,18 @@ let colorBalls;
 let balls;
 let rgbColor;
 let answer;
+let resetGame;
 
 // Circulo sorteado
 let chosenBall;
 
 // Obtem os elementos da página
 function obterElementos() {
+  rgbColor = document.getElementById('rgb-color');
+  resetGame = document.getElementById('reset-game');
+  answer = document.getElementById('answer');
   colorBalls = document.getElementById('color-balls');
   balls = document.getElementsByClassName('ball');
-  rgbColor = document.getElementById('rgb-color');
-  answer = document.getElementById('answer');
 }
 
 // Gerar cor aleatória
@@ -76,6 +78,7 @@ function verificarCor(event) {
 // Adiciona ouvintes aos elementos
 function adicionarOuvinte() {
   colorBalls.addEventListener('click', verificarCor);
+  resetGame.addEventListener('click', resetar);
 }
 
 // Iniciando a aplicação chamando as funções necessárias
