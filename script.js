@@ -2,16 +2,20 @@
 let colorBalls;
 let balls;
 let rgbColor;
+let score;
 let answer;
 let resetGame;
 
-// Circulo sorteado
+// Círculo sorteado
 let chosenBall;
+// Variável de controle para impedir de jogar com as mesmas cores
+let newGame;
 
 // Obtem os elementos da página
 function obterElementos() {
   rgbColor = document.getElementById('rgb-color');
   resetGame = document.getElementById('reset-game');
+  score = document.getElementById('score');
   answer = document.getElementById('answer');
   colorBalls = document.getElementById('color-balls');
   balls = document.getElementsByClassName('ball');
@@ -30,7 +34,7 @@ function gerarCor() {
   return cor;
 }
 
-// Define a cor dos circulos
+// Define a cor dos círculos
 function definirCor() {
   // Guarda as cores para verificar se não repetem
   const cores = [];
@@ -46,7 +50,7 @@ function definirCor() {
   }
 }
 
-// Sorteia um circulo
+// Sorteia um círculo
 function sortearCirculo() {
   chosenBall = balls[Math.floor(Math.random() * balls.length)];
 }
@@ -55,23 +59,37 @@ function sortearCirculo() {
 function resetar() {
   definirCor();
   sortearCirculo();
-  // Pega a cor do circulo e coloca na tela o valor rgb dela para ser adivinhada
+  // Pega a cor do círculo e coloca na tela o valor rgb dela para ser adivinhada
   let corRGB = chosenBall.style.backgroundColor;
   corRGB = corRGB.slice(3, corRGB.length);
   rgbColor.textContent = corRGB;
   // Reseta o texto de resposta
   answer.textContent = 'Escolha uma cor';
+  newGame = true;
+}
+
+// Atualiza o placar do jogo
+function atualizarPlacar(acertou) {
+  const placar = parseInt(score.textContent, 10);
+  if (acertou) {
+    score.textContent = placar + 3;
+  } else {
+    score.textContent = placar - 1;
+  }
 }
 
 // Verifica se a cor escolhida é a correta
 function verificarCor(event) {
   const element = event.target;
-  if (element.classList.contains('ball')) {
+  if (newGame && element.classList.contains('ball')) {
     if (element === chosenBall) {
       answer.textContent = 'Acertou!';
+      atualizarPlacar(true);
     } else {
       answer.textContent = 'Errou! Tente novamente!';
+      atualizarPlacar(false);
     }
+    newGame = false;
   }
 }
 
