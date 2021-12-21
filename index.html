@@ -13,18 +13,36 @@
 <body>
 
   <h1 id="title">Adivinhe a Cor</h1>
-  <span id="rgb-text">RGB<span id="rgb-color">(0,0,0)</span></span>
-  <button id="reset-game">Resetar</button>
-  <div>Placar: <span id="score">0</span></div>
-  <span id="answer"></span>
-  <section id="color-balls">
-    <div class="ball"></div>
-    <div class="ball"></div>
-    <div class="ball"></div>
-    <div class="ball"></div>
-    <div class="ball"></div>
-    <div class="ball"></div>
+
+  <div id="score-container">
+    <div id="barra1"></div>
+    <div id="barra2"></div>
+    <div id="placa">
+      Placar
+      <span id="score">0</span>
+    </div>
+  </div>
+
+  <section id="description-section">
+    <span id="description">
+      Selecione um círculo que represente a cor RGB abaixo.<br>
+      Clique no botão Resetar para joga de novo.
+    </span>
+    <span id="rgb-text">RGB<span id="rgb-color">(0,0,0)</span></span>
+    <button id="reset-game">Resetar</button>
   </section>
+
+  <main id="game-view">
+    <span id="answer"></span>
+    <section id="color-balls">
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+    </section>
+  </main>
 
 </body>
 

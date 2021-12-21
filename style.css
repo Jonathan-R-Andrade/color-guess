@@ -3,10 +3,93 @@
   padding: 0;
 }
 
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  padding-top: 140px;
+}
+
+#title {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  background-color: lightgrey;
+  border: rgb(140, 75, 15) 3px solid;
+  border-radius: 10px;
+  width: max-content;
+  padding: 0 20px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Placar */
+#score-container {
+  position: fixed;
+  top: 0;
+  width: max-content;
+  margin-left: 50%;
+  text-align: center;
+  line-height: 0;
+  transform: translateX(-50%);
+  perspective: 300px;
+}
+
+#score-container #barra1 {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 57px;
+  margin: 0 15px;
+  background-color: black;
+}
+
+#score-container #barra2 {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 57px;
+  margin: 0 15px;
+  background-color: black;
+}
+
+#placa {
+  background-color: rgb(50, 50, 50);
+  border: 2px solid black;
+  border-radius: 10px;
+  padding-top: 5px;
+  font-weight: 900;
+  line-height: initial;
+  color: white;
+  user-select: none;
+  cursor: pointer;
+  transform-origin: top;
+  animation: balancar 1s ease-in-out infinite alternate;
+}
+
+@keyframes balancar {
+
+  from {
+    transform: rotateX(-25deg);
+  }
+
+  to {
+    transform: rotateX(25deg);
+  }
+}
+
+#score {
+  display: block;
+  padding: 5px;
+  background-color: rgb(70, 70, 70);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  margin-top: 5px;
+}
+
+/* Círculos coloridos */
 .ball {
   display: inline-block;
   width: 50px;
   height: 50px;
-  background-color: black;
   border-radius: 50%;
 }
