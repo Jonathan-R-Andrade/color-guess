@@ -115,8 +115,12 @@ body {
   border-radius: 10px;
 }
 
-#description-section #reset-game {
-  display: block;
+#description-section #buttons {
+  text-align: center;
+}
+
+#description-section #buttons .button {
+  display: inline-block;
   margin: 10px auto 2px;
   padding: 5px 10px;
   border: 1px solid black;
@@ -130,14 +134,45 @@ body {
   cursor: pointer;
 }
 
-#description-section #reset-game:hover {
+#description-section #buttons .button:hover {
   background-color: rgb(50, 50, 50);
+}
+
+/* Dificuldade */
+#difficulty {
+  display: inline-block;
+}
+
+#difficulty #difficulty-level {
+  display: none;
+  width: fit-content;
+  margin-top: 10px;
+  padding: 5px;
+  background-color: rgb(170, 170, 170);
+  text-align: center;
+  font-size: 20px;
+  border-radius: 10px;
+}
+
+#difficulty #difficulty-level #level {
+  padding: 2px 10px;
+  background-color: white;
+  color: black;
+  font-size: 16px;
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.7);
+  outline: none;
+}
+
+#difficulty #difficulty-level #level:focus {
+  background-color: lightgrey;
 }
 
 /* Círculos coloridos */
 #game-view {
   width: fit-content;
-  max-width: 600px;
+  max-width: 500px;
   margin: 20px auto;
   text-align: center;
 }
@@ -160,7 +195,7 @@ body {
   border-bottom-right-radius: 10px;
 }
 
-#game-view #color-balls .ball {
+.ball {
   display: inline-block;
   width: 50px;
   height: 50px;
@@ -169,7 +204,7 @@ body {
   border: 2px solid black;
 }
 
-#game-view #color-balls .ball:hover {
+.ball:hover {
   width: 48px;
   height: 48px;
   border: 3px solid white;

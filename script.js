@@ -5,11 +5,20 @@ let rgbColor;
 let score;
 let answer;
 let resetGame;
+let difficultyButton;
+let difficultyLevel;
+let btnApplyLevel;
+let btnReturn;
+let inputLevel;
 
 // Círculo sorteado
 let chosenBall;
 // Variável de controle para impedir de jogar com as mesmas cores
 let newGame;
+// Nível do jogo
+let level = 1;
+const minLevel = 1;
+const maxLevel = 100;
 
 // Obtem os elementos da página
 function obterElementos() {
@@ -19,6 +28,11 @@ function obterElementos() {
   answer = document.getElementById('answer');
   colorBalls = document.getElementById('color-balls');
   balls = document.getElementsByClassName('ball');
+  difficultyButton = document.getElementById('difficulty-button');
+  difficultyLevel = document.getElementById('difficulty-level');
+  btnApplyLevel = document.getElementById('apply-level');
+  btnReturn = document.getElementById('return');
+  inputLevel = document.getElementById('level');
 }
 
 // Gerar cor aleatória
@@ -84,9 +98,9 @@ function mudarCorPlacar() {
 function atualizarPlacar(acertou) {
   const placar = parseInt(score.textContent, 10);
   if (acertou) {
-    score.textContent = placar + 3;
+    score.textContent = placar + (level * 3);
   } else {
-    score.textContent = placar - 1;
+    score.textContent = placar - level;
   }
   mudarCorPlacar();
 }
@@ -106,10 +120,68 @@ function verificarCor(event) {
   }
 }
 
+// Faz aparecer a opção de alterar o nível do jogo
+function abrirOpcaoNivel() {
+  difficultyButton.style.display = 'none';
+  difficultyLevel.style.display = 'block';
+  inputLevel.value = level;
+}
+
+// Faz desaparecer a opção de alterar o nível do jogo
+function fecharOpcaoNivel() {
+  difficultyButton.style.display = 'inline-block';
+  difficultyLevel.style.display = 'none';
+}
+
+// Altera a dificuldade do jogo
+function alterarDificuldade() {
+  level = inputLevel.value;
+  // Apaga os círculos atuais
+  colorBalls.innerHTML = '';
+  // Cria novos círculos de acordo com o nível escolhido
+  for (let i = 0; i < (level * 6); i += 1) {
+    const ball = document.createElement('div');
+    ball.className = 'ball';
+    colorBalls.appendChild(ball);
+    colorBalls.append(' ');
+  }
+
+  fecharOpcaoNivel();
+  balls = document.getElementsByClassName('ball');
+  resetar();
+}
+
+// Verifica se a tecla apertada no input é permitida
+function verificarTeclaInput(event) {
+  const inputValue = parseInt(inputLevel.value, 10);
+  if (event.key === 'Enter' && !Number.isNaN(inputValue)) {
+    alterarDificuldade();
+  } else if (event.key < '0' || event.key > '9') {
+    event.preventDefault();
+  }
+}
+
+// Verifica se o valor no input é permitido
+function verificarValorInput() {
+  const inputValue = parseInt(inputLevel.value, 10);
+  if (inputValue < minLevel) {
+    inputLevel.value = minLevel;
+  } else if (inputValue > maxLevel) {
+    inputLevel.value = maxLevel;
+  } else {
+    inputLevel.value = Number.isNaN(inputValue) ? '' : inputValue;
+  }
+}
+
 // Adiciona ouvintes aos elementos
 function adicionarOuvinte() {
   colorBalls.addEventListener('click', verificarCor);
   resetGame.addEventListener('click', resetar);
+  difficultyButton.addEventListener('click', abrirOpcaoNivel);
+  btnReturn.addEventListener('click', fecharOpcaoNivel);
+  btnApplyLevel.addEventListener('click', alterarDificuldade);
+  inputLevel.addEventListener('keypress', verificarTeclaInput);
+  inputLevel.addEventListener('input', verificarValorInput);
 }
 
 // Iniciando a aplicação chamando as funções necessárias
