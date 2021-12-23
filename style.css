@@ -6,7 +6,7 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 18px;
-  padding-top: 140px;
+  padding: 140px 10px 10px;
   background-color: rgb(80, 80, 80);
 }
 
@@ -136,7 +136,8 @@ body {
 
 /* Círculos coloridos */
 #game-view {
-  width: 390px;
+  width: fit-content;
+  max-width: 600px;
   margin: 20px auto;
   text-align: center;
 }
@@ -165,9 +166,11 @@ body {
   height: 50px;
   border-radius: 50%;
   cursor: pointer;
-  border: 2px solid transparent;
+  border: 2px solid black;
 }
 
 #game-view #color-balls .ball:hover {
-  border: 2px solid black;
+  width: 48px;
+  height: 48px;
+  border: 3px solid white;
 }

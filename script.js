@@ -68,6 +68,18 @@ function resetar() {
   newGame = true;
 }
 
+// Mudar a cor do placar
+function mudarCorPlacar() {
+  const placar = parseInt(score.textContent, 10);
+  if (placar > 0) {
+    score.style.backgroundColor = 'green';
+  } else if (placar < 0) {
+    score.style.backgroundColor = 'rgb(255, 50, 50)';
+  } else {
+    score.style.backgroundColor = 'rgb(70, 70, 70)';
+  }
+}
+
 // Atualiza o placar do jogo
 function atualizarPlacar(acertou) {
   const placar = parseInt(score.textContent, 10);
@@ -76,6 +88,7 @@ function atualizarPlacar(acertou) {
   } else {
     score.textContent = placar - 1;
   }
+  mudarCorPlacar();
 }
 
 // Verifica se a cor escolhida é a correta
