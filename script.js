@@ -16,7 +16,7 @@ let chosenBall;
 // Variável de controle para impedir de jogar com as mesmas cores
 let newGame;
 // Nível do jogo
-let level = 1;
+let level = 2;
 const minLevel = 1;
 const maxLevel = 100;
 
@@ -98,9 +98,9 @@ function mudarCorPlacar() {
 function atualizarPlacar(acertou) {
   const placar = parseInt(score.textContent, 10);
   if (acertou) {
-    score.textContent = placar + (level * 3);
+    score.textContent = placar + Math.floor(level * 1.5);
   } else {
-    score.textContent = placar - level;
+    score.textContent = placar - Math.floor(level * 0.5);
   }
   mudarCorPlacar();
 }
@@ -125,6 +125,7 @@ function abrirOpcaoNivel() {
   difficultyButton.style.display = 'none';
   difficultyLevel.style.display = 'block';
   inputLevel.value = level;
+  inputLevel.focus();
 }
 
 // Faz desaparecer a opção de alterar o nível do jogo
@@ -135,17 +136,21 @@ function fecharOpcaoNivel() {
 
 // Altera a dificuldade do jogo
 function alterarDificuldade() {
-  level = inputLevel.value;
+  // Verifiva se o valor no input está correto
+  const inputValue = parseInt(inputLevel.value, 10);
+  if (Number.isNaN(inputValue)) {
+    return;
+  }
+  level = inputValue;
   // Apaga os círculos atuais
   colorBalls.innerHTML = '';
   // Cria novos círculos de acordo com o nível escolhido
-  for (let i = 0; i < (level * 6); i += 1) {
+  for (let i = 0; i < (level * 3); i += 1) {
     const ball = document.createElement('div');
     ball.className = 'ball';
     colorBalls.appendChild(ball);
     colorBalls.append(' ');
   }
-
   fecharOpcaoNivel();
   balls = document.getElementsByClassName('ball');
   resetar();
@@ -153,8 +158,7 @@ function alterarDificuldade() {
 
 // Verifica se a tecla apertada no input é permitida
 function verificarTeclaInput(event) {
-  const inputValue = parseInt(inputLevel.value, 10);
-  if (event.key === 'Enter' && !Number.isNaN(inputValue)) {
+  if (event.key === 'Enter') {
     alterarDificuldade();
   } else if (event.key < '0' || event.key > '9') {
     event.preventDefault();
