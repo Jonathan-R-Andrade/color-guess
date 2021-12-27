@@ -69,8 +69,42 @@ function sortearCirculo() {
   chosenBall = balls[Math.floor(Math.random() * balls.length)];
 }
 
+// Constantes com o nome da classe css que altera a cor de fundo do elemento
+const BG_COLOR_WIN = 'bg-color-win';
+const BG_COLOR_LOSE = 'bg-color-lose';
+
+// Mudar a cor do placar
+function mudarCorPlacar() {
+  score.classList.remove('bg-score-default');
+  score.classList.remove(BG_COLOR_WIN);
+  score.classList.remove(BG_COLOR_LOSE);
+  const placar = parseInt(score.textContent, 10);
+  if (placar > 0) {
+    score.classList.add(BG_COLOR_WIN);
+  } else if (placar < 0) {
+    score.classList.add(BG_COLOR_LOSE);
+  } else {
+    score.classList.add('bg-score-default');
+  }
+}
+
+// Atualiza a cor de fundo dos círculos
+function atualizarFundoCirculos(acertou) {
+  colorBalls.classList.remove('bg-color-balls-default');
+  colorBalls.classList.remove(BG_COLOR_WIN);
+  colorBalls.classList.remove(BG_COLOR_LOSE);
+  if (acertou === null || acertou === undefined) {
+    colorBalls.classList.add('bg-color-balls-default');
+  } else if (acertou) {
+    colorBalls.classList.add(BG_COLOR_WIN);
+  } else {
+    colorBalls.classList.add(BG_COLOR_LOSE);
+  }
+}
+
 // Define novas cores e escolhe uma que devera ser adivinhada
 function resetar() {
+  atualizarFundoCirculos(null);
   definirCor();
   sortearCirculo();
   // Pega a cor do círculo e coloca na tela o valor rgb dela para ser adivinhada
@@ -80,18 +114,6 @@ function resetar() {
   // Reseta o texto de resposta
   answer.textContent = 'Escolha uma cor';
   newGame = true;
-}
-
-// Mudar a cor do placar
-function mudarCorPlacar() {
-  const placar = parseInt(score.textContent, 10);
-  if (placar > 0) {
-    score.style.backgroundColor = 'green';
-  } else if (placar < 0) {
-    score.style.backgroundColor = 'rgb(255, 50, 50)';
-  } else {
-    score.style.backgroundColor = 'rgb(70, 70, 70)';
-  }
 }
 
 // Atualiza o placar do jogo
@@ -112,9 +134,11 @@ function verificarCor(event) {
     if (element === chosenBall) {
       answer.textContent = 'Acertou!';
       atualizarPlacar(true);
+      atualizarFundoCirculos(true);
     } else {
       answer.textContent = 'Errou! Tente novamente!';
       atualizarPlacar(false);
+      atualizarFundoCirculos(false);
     }
     newGame = false;
   }
