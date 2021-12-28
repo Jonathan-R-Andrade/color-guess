@@ -1,6 +1,7 @@
 // Elementos HTML
 let colorBalls;
 let balls;
+let rgbText;
 let rgbColor;
 let score;
 let answer;
@@ -22,6 +23,7 @@ const maxLevel = 100;
 
 // Obtem os elementos da página
 function obterElementos() {
+  rgbText = document.getElementById('rgb-text');
   rgbColor = document.getElementById('rgb-color');
   resetGame = document.getElementById('reset-game');
   score = document.getElementById('score');
@@ -201,6 +203,15 @@ function verificarValorInput() {
   }
 }
 
+// Fixa a cor rgb ao rolar a página
+function fixarCorRGB() {
+  if (window.scrollY > 55) {
+    rgbText.classList.add('rgb-text-fixed');
+  } else {
+    rgbText.classList.remove('rgb-text-fixed');
+  }
+}
+
 // Adiciona ouvintes aos elementos
 function adicionarOuvinte() {
   colorBalls.addEventListener('click', verificarCor);
@@ -210,6 +221,7 @@ function adicionarOuvinte() {
   btnApplyLevel.addEventListener('click', alterarDificuldade);
   inputLevel.addEventListener('keypress', verificarTeclaInput);
   inputLevel.addEventListener('input', verificarValorInput);
+  window.addEventListener('scroll', fixarCorRGB);
 }
 
 // Iniciando a aplicação chamando as funções necessárias
