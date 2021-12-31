@@ -11,6 +11,8 @@ let difficultyLevel;
 let btnApplyLevel;
 let btnReturn;
 let inputLevel;
+let autoResetCheckbox;
+let autoResetButton;
 
 // Círculo sorteado
 let chosenBall;
@@ -35,6 +37,8 @@ function obterElementos() {
   btnApplyLevel = document.getElementById('apply-level');
   btnReturn = document.getElementById('return');
   inputLevel = document.getElementById('level');
+  autoResetCheckbox = document.getElementById('auto-reset-check');
+  autoResetButton = document.getElementById('auto-reset-button');
 }
 
 // Gerar cor aleatória
@@ -129,6 +133,13 @@ function atualizarPlacar(acertou) {
   mudarCorPlacar();
 }
 
+// Auto reseta o jogo se a opção estiver ativa
+function autoResetar() {
+  if (autoResetCheckbox.checked) {
+    window.setTimeout(resetar, 1500);
+  }
+}
+
 // Verifica se a cor escolhida é a correta
 function verificarCor(event) {
   const element = event.target;
@@ -143,9 +154,9 @@ function verificarCor(event) {
       atualizarFundoCirculos(false);
     }
     newGame = false;
+    autoResetar();
   }
 }
-
 // Faz aparecer a opção de alterar o nível do jogo
 function abrirOpcaoNivel() {
   difficultyButton.style.display = 'none';
@@ -159,7 +170,6 @@ function fecharOpcaoNivel() {
   difficultyButton.style.display = 'inline-block';
   difficultyLevel.style.display = 'none';
 }
-
 // Altera a dificuldade do jogo
 function alterarDificuldade() {
   // Verifiva se o valor no input está correto
@@ -181,7 +191,6 @@ function alterarDificuldade() {
   balls = document.getElementsByClassName('ball');
   resetar();
 }
-
 // Verifica se a tecla apertada no input é permitida
 function verificarTeclaInput(event) {
   if (event.key === 'Enter') {
@@ -190,7 +199,6 @@ function verificarTeclaInput(event) {
     event.preventDefault();
   }
 }
-
 // Verifica se o valor no input é permitido
 function verificarValorInput() {
   const inputValue = parseInt(inputLevel.value, 10);
@@ -202,7 +210,6 @@ function verificarValorInput() {
     inputLevel.value = Number.isNaN(inputValue) ? '' : inputValue;
   }
 }
-
 // Fixa a cor rgb ao rolar a página
 function fixarCorRGB() {
   if (window.scrollY > 55) {
@@ -211,7 +218,19 @@ function fixarCorRGB() {
     rgbText.classList.remove('rgb-text-fixed');
   }
 }
-
+// Desabilita botão resetar se a opção de auto resetar for ativa
+function desabilitaBotaoResetar() {
+  if (!autoResetCheckbox.checked) {
+    resetar();
+    resetGame.style.textDecorationLine = 'line-through';
+    resetGame.style.cursor = 'not-allowed';
+    resetGame.removeEventListener('click', resetar);
+  } else {
+    resetGame.style.textDecorationLine = '';
+    resetGame.style.cursor = '';
+    resetGame.addEventListener('click', resetar);
+  }
+}
 // Adiciona ouvintes aos elementos
 function adicionarOuvinte() {
   colorBalls.addEventListener('click', verificarCor);
@@ -222,8 +241,8 @@ function adicionarOuvinte() {
   inputLevel.addEventListener('keypress', verificarTeclaInput);
   inputLevel.addEventListener('input', verificarValorInput);
   window.addEventListener('scroll', fixarCorRGB);
+  autoResetButton.addEventListener('click', desabilitaBotaoResetar);
 }
-
 // Iniciando a aplicação chamando as funções necessárias
 obterElementos();
 adicionarOuvinte();
