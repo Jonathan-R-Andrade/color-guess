@@ -15,14 +15,14 @@ function obterElementos() {
 
 // Pega a posição da parte de baixo da placa
 function pegarPlaqueBottomPosition() {
-  // Não usei o DOMRect.bottom devido o rotateX() do CSS que altera a altura do elemento
-  // e faz o DOMRect.bottom ficar variando.
+  // Não usei a propriedade DOMRect.bottom porque a função rotateX() do CSS
+  // altera a altura do elemento e faz a DOMRect.bottom ficar variando.
   plaqueBottomPosition = plaque.getBoundingClientRect().top + plaque.offsetHeight;
-  // acrescento mais 5px porque é a distancia que eu quero do texto rgb
+  // Acrescento mais 5px porque é a distância que eu quero do texto rgb
   plaqueBottomPosition += 5;
 }
 
-// Fixa a cor rgb ao rolar a página
+// Fixa a cor(texto) rgb ao rolar a página
 function fixarRGBText() {
   const rgbTextContainerTopPosition = rgbTextContainer.getBoundingClientRect().top;
   if (rgbTextContainerTopPosition < 0 || rgbTextContainerTopPosition < plaqueBottomPosition) {
@@ -37,9 +37,15 @@ function fixarRGBText() {
 // Ajusta os elementos de acordo com a largura da página
 function ajustarElementos() {
   pegarPlaqueBottomPosition();
-  fixarRGBText();
+
+  let maxWidth = rgbTextContainer.getBoundingClientRect().width;
+  maxWidth = String(maxWidth).concat('px');
+  rgbText.style.maxWidth = maxWidth;
+
   rgbText.style.top = String(plaqueBottomPosition).concat('px');
+
   document.body.style.paddingTop = String(plaqueBottomPosition + 10).concat('px');
+  fixarRGBText();
 }
 
 // Adiciona ouvintes aos elementos

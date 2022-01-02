@@ -18,7 +18,7 @@ let chosenBall;
 // Variável de controle para impedir de jogar com as mesmas cores
 let newGame;
 // Nível do jogo
-let level = 2;
+let level = 3;
 const minLevel = 1;
 const maxLevel = 100;
 
@@ -124,9 +124,9 @@ function resetar() {
 function atualizarPlacar(acertou) {
   const placar = parseInt(score.textContent, 10);
   if (acertou) {
-    score.textContent = placar + Math.floor(level * 1.5);
+    score.textContent = placar + level;
   } else {
-    score.textContent = placar - Math.floor(level * 0.5);
+    score.textContent = placar - Math.ceil(level / 3);
   }
   mudarCorPlacar();
 }
@@ -181,7 +181,7 @@ function alterarDificuldade() {
   // Apaga os círculos atuais
   colorBalls.innerHTML = '';
   // Cria novos círculos de acordo com o nível escolhido
-  for (let i = 0; i < (level * 3); i += 1) {
+  for (let i = 0; i < (level * 2); i += 1) {
     const ball = document.createElement('div');
     ball.className = 'ball';
     colorBalls.appendChild(ball);

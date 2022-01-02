@@ -119,12 +119,12 @@ header {
   margin: 0 auto;
   background-color: lightgrey;
   text-align: center;
+  box-sizing: border-box;
 }
 
 .rgb-text-fixed {
   position: fixed;
   z-index: 1;
-  top: 125px;
   left: 0;
   right: 0;
 }
