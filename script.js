@@ -1,7 +1,6 @@
 // Elementos HTML
 let colorBalls;
 let balls;
-let rgbText;
 let rgbColor;
 let score;
 let answer;
@@ -25,7 +24,6 @@ const maxLevel = 100;
 
 // Obtem os elementos da página
 function obterElementos() {
-  rgbText = document.getElementById('rgb-text');
   rgbColor = document.getElementById('rgb-color');
   resetGame = document.getElementById('reset-game');
   score = document.getElementById('score');
@@ -48,8 +46,8 @@ function gerarCor() {
   rgb.push(Math.round(Math.random() * 255));
   rgb.push(Math.round(Math.random() * 255));
   // Define uma string com a cor rgb
-  let cor = 'rgb('.concat(rgb[0]).concat(', ');
-  cor = cor.concat(rgb[1]).concat(', ');
+  let cor = 'rgb('.concat(rgb[0]).concat(',');
+  cor = cor.concat(rgb[1]).concat(',');
   cor = cor.concat(rgb[2]).concat(')');
   return cor;
 }
@@ -116,7 +114,7 @@ function resetar() {
   // Pega a cor do círculo e coloca na tela o valor rgb dela para ser adivinhada
   let corRGB = chosenBall.style.backgroundColor;
   corRGB = corRGB.slice(3, corRGB.length);
-  rgbColor.textContent = corRGB;
+  rgbColor.textContent = corRGB.replace(/ /g, '');
   // Reseta o texto de resposta
   answer.textContent = 'Escolha uma cor';
   newGame = true;
@@ -157,6 +155,7 @@ function verificarCor(event) {
     autoResetar();
   }
 }
+
 // Faz aparecer a opção de alterar o nível do jogo
 function abrirOpcaoNivel() {
   difficultyButton.style.display = 'none';
@@ -170,6 +169,7 @@ function fecharOpcaoNivel() {
   difficultyButton.style.display = 'inline-block';
   difficultyLevel.style.display = 'none';
 }
+
 // Altera a dificuldade do jogo
 function alterarDificuldade() {
   // Verifiva se o valor no input está correto
@@ -191,6 +191,7 @@ function alterarDificuldade() {
   balls = document.getElementsByClassName('ball');
   resetar();
 }
+
 // Verifica se a tecla apertada no input é permitida
 function verificarTeclaInput(event) {
   if (event.key === 'Enter') {
@@ -199,6 +200,7 @@ function verificarTeclaInput(event) {
     event.preventDefault();
   }
 }
+
 // Verifica se o valor no input é permitido
 function verificarValorInput() {
   const inputValue = parseInt(inputLevel.value, 10);
@@ -210,14 +212,7 @@ function verificarValorInput() {
     inputLevel.value = Number.isNaN(inputValue) ? '' : inputValue;
   }
 }
-// Fixa a cor rgb ao rolar a página
-function fixarCorRGB() {
-  if (window.scrollY > 55) {
-    rgbText.classList.add('rgb-text-fixed');
-  } else {
-    rgbText.classList.remove('rgb-text-fixed');
-  }
-}
+
 // Desabilita botão resetar se a opção de auto resetar for ativa
 function desabilitaBotaoResetar() {
   if (!autoResetCheckbox.checked) {
@@ -231,6 +226,7 @@ function desabilitaBotaoResetar() {
     resetGame.addEventListener('click', resetar);
   }
 }
+
 // Adiciona ouvintes aos elementos
 function adicionarOuvinte() {
   colorBalls.addEventListener('click', verificarCor);
@@ -240,9 +236,9 @@ function adicionarOuvinte() {
   btnApplyLevel.addEventListener('click', alterarDificuldade);
   inputLevel.addEventListener('keypress', verificarTeclaInput);
   inputLevel.addEventListener('input', verificarValorInput);
-  window.addEventListener('scroll', fixarCorRGB);
   autoResetButton.addEventListener('click', desabilitaBotaoResetar);
 }
+
 // Iniciando a aplicação chamando as funções necessárias
 obterElementos();
 adicionarOuvinte();

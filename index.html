@@ -8,25 +8,28 @@
   <title>Adivinhe a Cor</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer="true"></script>
+  <script src="script2.js" defer="true"></script>
 </head>
 
 <body>
-
-  <h1 id="title">Adivinhe a Cor</h1>
-
-  <div id="score-container">
-    <div id="bar1"></div>
-    <div id="bar2"></div>
-    <input id="swing" type="checkbox" checked="true">
-    <label for="swing" id="plaque">
-      Placar
-      <span id="score" class="bg-score-default">0</span>
-    </label>
-  </div>
+  <header>
+    <h1 id="title">Adivinhe a Cor</h1>
+    <div id="score-container">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <input id="swing" type="checkbox" checked="true" style="position: absolute; left: -1000px;">
+      <label for="swing" id="plaque">
+        Placar
+        <span id="score" class="bg-score-default">0</span>
+      </label>
+    </div>
+  </header>
 
   <section id="description-section">
-    Selecione um círculo que represente a cor RGB abaixo.<br>
-    <span id="rgb-text" class="rgb-text-not-fixed">RGB<span id="rgb-color">(0,0,0)</span></span>
+    Selecione um círculo que represente a cor RGB abaixo.
+    <div id="rgb-text-container">
+      <span id="rgb-text">RGB <span id="rgb-color">(0,0,0)</span></span>
+    </div>
     Clique no botão RESETAR para jogar de novo.<br>
     <div id="buttons">
       <input id="auto-reset-check" type="checkbox" style="position: absolute; left: -1000px;">

@@ -6,74 +6,60 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 18px;
-  padding: 140px 10px 10px;
+  padding: 133px 10px 10px;
   background-color: rgb(80, 80, 80);
 }
 
-#title {
+header {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 3;
-  background-color: lightgrey;
+  right: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+#title {
+  width: fit-content;
+  padding: 0 20px;
+  margin: auto;
   border: black 3px solid;
   border-radius: 10px;
-  width: max-content;
-  padding: 0 20px;
-  margin-left: 50%;
-  transform: translateX(-50%);
+  text-align: center;
+  background-color: lightgrey;
+  pointer-events: auto;
 }
 
 /* Placar */
 #score-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 2;
   width: max-content;
-  margin-left: 50%;
+  margin: auto;
   text-align: center;
   line-height: 0;
-  transform: translateX(-50%);
   perspective: 300px;
+  pointer-events: auto;
 }
 
-#score-container #bar1 {
-  content: '';
+#score-container .bar {
   display: inline-block;
   width: 5px;
-  height: 57px;
+  height: 10px;
   margin: 0 15px;
   background-color: black;
-}
-
-#score-container #bar2 {
-  content: '';
-  display: inline-block;
-  width: 5px;
-  height: 57px;
-  margin: 0 15px;
-  background-color: black;
-}
-
-#score-container #swing {
-  position: absolute;
-  display: none;
 }
 
 #score-container #plaque {
   display: block;
   background-color: rgb(50, 50, 50);
+  padding-top: 5px;
   border: 2px solid black;
   border-radius: 10px;
-  padding-top: 5px;
   font-weight: 900;
   line-height: initial;
   color: white;
   user-select: none;
   cursor: pointer;
   transform-origin: top;
-  animation: none;
 }
 
 #score-container #swing:checked + #plaque {
@@ -120,17 +106,19 @@ body {
   background-color: lightgrey;
 }
 
-#description-section #rgb-text {
+#description-section #rgb-text-container {
+  margin: 10px 0;
+}
+
+#description-section #rgb-text-container #rgb-text {
   display: block;
   width: fit-content;
   padding: 5px;
   border: 2px solid black;
   border-radius: 10px;
+  margin: 0 auto;
   background-color: lightgrey;
-}
-
-.rgb-text-not-fixed {
-  margin: 10px auto;
+  text-align: center;
 }
 
 .rgb-text-fixed {
@@ -138,12 +126,11 @@ body {
   z-index: 1;
   top: 125px;
   left: 0;
-  margin: 0 0 0 50%;
-  transform: translateX(-50%);
+  right: 0;
 }
 
 #description-section #buttons {
-  display: inline-block;
+  margin: 0 auto;
   text-align: center;
 }
 
@@ -187,7 +174,7 @@ body {
   background-color: rgb(100, 100, 100);
   border-radius: 100px;
   opacity: 0;
-  transition: width 500ms linear, opacity 0s 500ms linear;
+  transition: width 500ms linear, opacity 0ms 500ms;
 }
 
 #auto-reset-button:after {
@@ -229,7 +216,6 @@ body {
 /* Dificuldade */
 #difficulty {
   display: inline-block;
-  margin: 0 5px;
 }
 
 #difficulty #difficulty-level {
