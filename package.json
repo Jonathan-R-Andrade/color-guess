@@ -1,4 +1,15 @@
 {
+  "name": "color-guess",
+  "scripts": {
+    "lint": "eslint --no-inline-config --ext .js,.jsx --no-error-on-unmatched-pattern -c .eslintrc.json .",
+    "lint:styles": "stylelint **/*.css --config .stylelintrc.json --ignore-disables --allow-empty-input"
+  },
+  "homepage": "https://jonathan-r-andrade.github.io/color-guess",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonathan-r-andrade/color-guess.git"
+  },
+  "author": "Jonathan R. Andrade",
   "devDependencies": {
     "eslint": "6.8.0",
     "eslint-config-trybe-fundamentals": "1.1.0",
@@ -8,9 +19,5 @@
     "eslint-plugin-sonarjs": "0.5.0",
     "stylelint": "13.8.0",
     "stylelint-config-standard": "^20.0.0"
-  },
-  "scripts": {
-    "lint": "eslint --no-inline-config --ext .js,.jsx --no-error-on-unmatched-pattern -c .eslintrc.json .",
-    "lint:styles": "stylelint **/*.css --config .stylelintrc.json --ignore-disables --allow-empty-input"
   }
 }
