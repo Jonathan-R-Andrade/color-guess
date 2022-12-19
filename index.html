@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adivinhe a Cor</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js" defer="true"></script>
+  <script src="js/script2.js" defer="true"></script>
+</head>
+
+<body>
+  <header>
+    <h1 id="title">Adivinhe a Cor</h1>
+    <div id="score-container">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <input id="swing" type="checkbox" checked="true" style="position: absolute; left: -1000px;">
+      <label for="swing" id="plaque">
+        Placar
+        <span id="score" class="bg-score-default">0</span>
+      </label>
+    </div>
+  </header>
+
+  <section id="description-section">
+    Selecione um círculo que represente a cor RGB abaixo.
+    <div id="rgb-text-container">
+      <span id="rgb-text">RGB <span id="rgb-color">(0,0,0)</span></span>
+    </div>
+    Clique no botão RESETAR para jogar de novo.<br>
+    <div id="buttons">
+      <input id="auto-reset-check" type="checkbox" style="position: absolute; left: -1000px;">
+      <label id="auto-reset-button" for="auto-reset-check" class="button">Auto Resetar</label>
+
+      <button id="reset-game" class="button">Resetar</button>
+
+      <div id="difficulty">
+        <span id="difficulty-button" class="button">Dificuldade</span>
+        <div id="difficulty-level">
+          Nível: <input id="level" type="number" min="1" max="100"> <br>
+          <button id="apply-level" class="button">Aplicar</button>
+          <button id="return" class="button">Voltar</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main id="game-view">
+    <span id="answer"></span>
+    <section id="color-balls" class="bg-color-balls-default">
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+    </section>
+  </main>
+
+</body>
+
+</html>
