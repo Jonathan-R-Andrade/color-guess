@@ -53,7 +53,7 @@ Siga os passos abaixo executando os comandos no terminal.
 
 ### Executando a aplicação
 
-Abra o arquivo `index.html` no navegador.
+Entre na pasta `src` e abra o arquivo `index.html` no navegador.
 
 ---
 
